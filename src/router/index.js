@@ -1,7 +1,6 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import Hello from '@/components/Hello'
-import Banner from '@/components/Banner'
+import Index from '@/pages/Index'
 
 Vue.use(Router)
 
@@ -12,13 +11,7 @@ export default new Router
   [
     {
       path: '/',
-      name: 'Hello',
-      component: Hello
-    },
-    {
-      path: '/Banner/:color',
-      name: 'Banner',
-      component: Banner
+      component: Index
     }
   ]
 })
