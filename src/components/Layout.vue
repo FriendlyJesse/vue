@@ -5,11 +5,13 @@
         <img src="../assets/logo.png">
         <div class="head-nav">
           <ul class="nav-list">
-            <li>登录</li>
+            <li>{{userName}}</li>
+            <li v-if="!userName" @click="logClick">登录</li>
             <li class="nav-pile">|</li>
-            <li>注册</li>
+            <li v-if="userName">退出</li>
+            <li v-if="!userName" @click="regClick">注册</li>
             <li class="nav-pile">|</li>
-            <li>关于</li>
+            <li @click="aboutClick">关于</li>
           </ul>
         </div>
       </div>
@@ -22,15 +24,60 @@
     <div class="app-foot">
       <p>© 2016 fishenal MIT</p>
     </div>
+    <my-dialog :isShow="isShowLogDialog" @on-close="closeDialog('isShowLogDialog')">
+      <log-form @has-log="successlog"></log-form>
+    </my-dialog>
+    <my-dialog :isShow="isShowRegDialog" @on-close="closeDialog('isShowRegDialog')">
+      <reg-form></reg-form>
+    </my-dialog>
+    <my-dialog :isShow="isShowAboutDialog" @on-close="closeDialog('isShowAboutDialog')">
+      <p>本报告在调研数据的基础上，采用定性与定量相结合的方式深入分析了专车市场发展的驱动因素与阻碍因素、专车市场背后的产业格局、专车企业的竞争格局、用户对专车市场的依赖程度、专车对其他交通工具运力的补充效应等，通过这五个章节的研究反映专车市场的发展态势和面临的问题。报告力求客观、深入、准确地反映中国专车市场发展情况，为政府、企事业单位和社会各界提供决策依据。 </p>
+    </my-dialog>
   </div>
 </template>
 
 <script>
+import Dialog from '@/components/dialog'
+import logForm from '@/components/logForm'
+import regForm from '@/components/regForm'
 export default {
   name: 'layout',
+  components:
+  {
+    myDialog: Dialog,
+    logForm,
+    regForm
+  },
   data () {
     return {
-
+      isShowLogDialog: false,
+      isShowRegDialog: false,
+      isShowAboutDialog: false,
+      userName: ''
+    }
+  },
+  methods:
+  {
+    logClick()
+    {
+      this.isShowLogDialog = true;
+    },
+    regClick()
+    {
+      this.isShowRegDialog = true;
+    },
+    aboutClick()
+    {
+      this.isShowAboutDialog = true;
+    },
+    closeDialog(attr)
+    {
+      this[attr] = false;
+    },
+    successlog(data)
+    {
+      this.closeDialog('isShowLogDialog');
+      this.userName = data.username;
     }
   }
 }
