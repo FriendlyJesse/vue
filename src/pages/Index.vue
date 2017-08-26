@@ -50,10 +50,10 @@
     name: 'Index',
     created()
     {
-      this.axios.get('getList', {userId: 123})
-        .then(function()
+      this.axios.get('/api/posts')
+        .then(function(data)
         {
-          console.log(1);
+          console.log(data);
         });
     },
     data ()
