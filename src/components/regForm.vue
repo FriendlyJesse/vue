@@ -4,13 +4,13 @@
       <div class="g-form-line" v-for="formLine in formData">
         <span class="g-form-label">{{ formLine.label }}：</span>
         <div class="g-form-input">
-          <input type="text" 
-          v-model="formLine.model" placeholder="请输入用户名">
+          <input type="text"
+          v-model="formLine.model" :placeholder="formLine.placeholder">
         </div>
       </div>
       <div class="g-form-line">
         <div class="g-form-btn">
-          <a class="button" @click="onLogin">登录</a>
+          <a class="button">注册</a>
         </div>
       </div>
     </div>
@@ -24,7 +24,24 @@ export default {
   },
   data () {
     return {
-      
+      formData:
+      [
+        {
+          label: '用户名',
+          model: '',
+          placeholder: '请输入用户名'
+        },
+        {
+          label: '密码',
+          model: '',
+          placeholder: '请输入密码'
+        },
+        {
+          label: '邮箱',
+          model: '',
+          placeholder: '请输入邮箱'
+        }
+      ]
     }
   },
   computed: {
